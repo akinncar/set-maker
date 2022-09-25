@@ -4,16 +4,13 @@ import { useState } from 'react';
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const [urlList, setUrlList] = useState('https://www.youtube.com/watch?v=FIuMahdQEB0');
+  const [urlList, setUrlList] = useState('https://www.youtube.com/watch?v=FIuMahdQEB0 https://www.youtube.com/watch?v=mESzPWz_BSk');
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submit");
 
-    fetch('api/videos').then(function(response) {
-     response.json().then(function(json) {
-        console.log({json})
-      });
+    fetch(`api/videos/?urlList=${encodeURIComponent(urlList)}`).then(function(response) {
+     response.json().then((json) => console.log(json));
     });
   }
 
